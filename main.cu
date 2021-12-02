@@ -13,7 +13,6 @@ int main(void){
 												4.9, 3.0, 1.4, 0.2,
 												6.2, 3.4, 5.4, 2.3,
 												5.9, 3.0, 5.1, 1.8 };
-
 	const signed int X_size = sizeof(h_X);
 
 	float *d_X;

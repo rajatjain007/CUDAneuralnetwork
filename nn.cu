@@ -152,7 +152,7 @@ __global__ void km1Tdotm2(const int nThreads, const float *m1, const float *m2, 
 
 __device__ void dm1Tdotm2(const float *m1, const float *m2, float *output, const int m1_height , const int m1_width, const int m2_width )
 {
-	km1Tdotm22 <<< m1_width, m2_width >>> (m1_width * m2_width, m1, m2, output, m1_height, m1_width, m2_width );
+	km1Tdotm2 <<< m1_width, m2_width >>> (m1_width * m2_width, m1, m2, output, m1_height, m1_width, m2_width );
 	cudaDeviceSynchronize();
 }
 
@@ -184,8 +184,8 @@ __global__ void kfit(	const float* X, const int X_w, const int X_h,
         dsigmoid(ddot(X, W0, l1, X_h, X_w, l1_w), l1, X_h, l1_w);
         dsigmoid(ddot(l1, W1, pred, X_h, l1_w, y_w), pred, X_h, y_w);
         //Back propogation
-        dMartixByMatrixElementwise(dmatsub(y, pred, pred_d, X_h, y_w), ddersigmoid(pred, buffer, X_h, y_w), pred_d, X_h, y_w );
-        dMartixByMatrixElementwise(dm1dotm2T(pred_d, W1, l_1_d, X_h, y_w, l1_w), ddersigmoid(l1, buffer, X_h, l1_w), l_1_d, X_h, l1_w);
+        dmatbymat(dmatsub(y, pred, pred_d, X_h, y_w), ddersigmoid(pred, buffer, X_h, y_w), pred_d, X_h, y_w );
+        dmatbymat(dm1dotm2T(pred_d, W1, l_1_d, X_h, y_w, l1_w), ddersigmoid(l1, buffer, X_h, l1_w), l_1_d, X_h, l1_w);
         //Updating weights
 		dm1Tdotm2( l1, pred_d, W1, X_h, l1_w, y_w );
         dm1Tdotm2( X, l_1_d, W0, X_h, X_w, l1_w );
