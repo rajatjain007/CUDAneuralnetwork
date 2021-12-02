@@ -181,8 +181,8 @@ __global__ void kfit(	const float* X, const int X_w, const int X_h,
 	for (unsigned i = 0; i < 50; ++i) {
 
         //Activation function
-        dsigmoid(ddot(X, W0, l1, X_h, X_w, l1_w), l1, X_h, l1_w);
-        dsigmoid(ddot(l1, W1, pred, X_h, l1_w, y_w), pred, X_h, y_w);
+        dsigmoid(ddotprod(X, W0, l1, X_h, X_w, l1_w), l1, X_h, l1_w);
+        dsigmoid(ddotprod(l1, W1, pred, X_h, l1_w, y_w), pred, X_h, y_w);
         //Back propogation
         dmatbymat(dmatsub(y, pred, pred_d, X_h, y_w), ddersigmoid(pred, buffer, X_h, y_w), pred_d, X_h, y_w );
         dmatbymat(dm1dotm2T(pred_d, W1, l_1_d, X_h, y_w, l1_w), ddersigmoid(l1, buffer, X_h, l1_w), l_1_d, X_h, l1_w);
