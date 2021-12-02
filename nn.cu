@@ -168,6 +168,7 @@ __device__ void kdispmat (const float* M, int h, int w) {
 	printf("\n");
 }
 
+//Training for 50 epochs
 __global__ void kfit(	const float* X, const int X_w, const int X_h,
 						const float* y, const int y_w,
 						float* l1, const int l1_w, float* l_1_d,
@@ -179,11 +180,14 @@ __global__ void kfit(	const float* X, const int X_w, const int X_h,
 {
 	for (unsigned i = 0; i < 50; ++i) {
 
+        //Activation function
         dsigmoid(ddot(X, W0, l1, X_h, X_w, l1_w), l1, X_h, l1_w);
         dsigmoid(ddot(l1, W1, pred, X_h, l1_w, y_w), pred, X_h, y_w);
+        //Back propogation
         dMartixByMatrixElementwise(dmatsub(y, pred, pred_d, X_h, y_w), ddersigmoid(pred, buffer, X_h, y_w), pred_d, X_h, y_w );
         dMartixByMatrixElementwise(dm1dotm2T(pred_d, W1, l_1_d, X_h, y_w, l1_w), ddersigmoid(l1, buffer, X_h, l1_w), l_1_d, X_h, l1_w);
-        dm1Tdotm2( l1, pred_d, W1, X_h, l1_w, y_w );
+        //Updating weights
+		dm1Tdotm2( l1, pred_d, W1, X_h, l1_w, y_w );
         dm1Tdotm2( X, l_1_d, W0, X_h, X_w, l1_w );
     }
 }

@@ -31,7 +31,7 @@ int main(void){
 	cudaMalloc(&d_W0, W0_size);
 	cudaMemcpy(d_W0, h_W0, W0_size, cudaMemcpyHostToDevice);
 
-	//LAYER_1, LAYER_1_DELTA AND BUFFER OF LAYER 1 SIZE
+	//LAYER 1, LAYER 1 DELTA AND BUFFER OF LAYER 1 SIZE
 	const long signed int L1_size = L1_SIZE*TRAINING_SIZE*sizeof(float);
 
 	float* h_layer_1 = (float*)malloc(L1_size);
@@ -56,7 +56,7 @@ int main(void){
 	cudaMalloc(&d_layer_1_delta, L1_size);
 	cudaMemcpy(d_layer_1_delta, h_layer_1_delta, L1_size, cudaMemcpyHostToDevice);
 
-	//WEIGHTS_1
+	//WEIGHTS 1
 	const long signed int W1_size = L1_SIZE*sizeof(float);
 	float *h_W1 = (float*)malloc(W1_size);
 	for (int i = 0; i < L1_SIZE; i++){
@@ -93,7 +93,7 @@ int main(void){
 	cudaMalloc(&d_pred_delta, y_size);
 	cudaMemcpy(d_pred_delta, h_pred_delta, y_size, cudaMemcpyHostToDevice);
 
-	kFit <<< 1, 1 >>> (	d_X, TRAINING_DIM, TRAINING_SIZE,
+	kfit <<< 1, 1 >>> (	d_X, TRAINING_DIM, TRAINING_SIZE,
 						d_y, 1,
 						d_layer_1, L1_SIZE, d_layer_1_delta,
 						d_pred,
