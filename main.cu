@@ -4,8 +4,8 @@
 
 int main(void){
 
-	const int TRAINING_SIZE = 101;
-	const int TRAINING_DIM = 4;
+	const int TRAINING_SIZE = 4;
+	const int TRAINING_DIM = 101;
 	const int L1_SIZE = 8;
 
 	// X, the first 101 lines from Iris dataset
