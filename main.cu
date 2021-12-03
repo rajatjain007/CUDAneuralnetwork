@@ -163,7 +163,7 @@ int main(void){
 	cudaMemcpy(d_W1, h_W1, W1_size, cudaMemcpyHostToDevice);
 
 	//Y
-	float h_y[101] = {0
+	float h_y[101] = {0,
 0,
 0,
 0,
@@ -190,7 +190,7 @@ int main(void){
 0,
 0,
 0,
-0
+0,
 0,
 0,
 0,
