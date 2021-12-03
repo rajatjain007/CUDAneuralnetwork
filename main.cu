@@ -4,8 +4,8 @@
 
 int main(void){
 
-	const int TRAINING_SIZE = 8;
-	const int TRAINING_DIM = 5;
+	const int TRAINING_SIZE = 5;
+	const int TRAINING_DIM = 8;
 	const int L1_SIZE = 8;
 
 	// X, the first 4 lines from Iris dataset
@@ -69,7 +69,7 @@ int main(void){
 	cudaMemcpy(d_W1, h_W1, W1_size, cudaMemcpyHostToDevice);
 
 	//Y
-	float h_y[4] = {	1,
+	float h_y[5] = {	1,
 						0,
 						1,
 						0,
