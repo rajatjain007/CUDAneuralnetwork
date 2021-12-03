@@ -4,7 +4,7 @@
 
 int main(void){
 
-	const int TRAINING_SIZE = 101;
+	const int TRAINING_SIZE = 4;
 	const int TRAINING_DIM = 4;
 	const int L1_SIZE = 8;
 
@@ -72,7 +72,7 @@ int main(void){
 						0,
 						1,
 						1 };
-						
+
 	const signed int y_size = sizeof(h_y);
 	float *d_y;
 	cudaMalloc(&d_y, y_size);
