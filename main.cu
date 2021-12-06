@@ -4,7 +4,7 @@
 
 int main(void){
 
-	const int TRAINING_SIZE = 4;
+	const int TRAINING_SIZE = 8;
 	const int TRAINING_DIM = 4;
 	const int L1_SIZE = 8;
 
@@ -12,7 +12,11 @@ int main(void){
 	float h_X[TRAINING_SIZE*TRAINING_DIM] = {	5.1, 3.5, 1.4, 0.2,
 												4.9, 3.0, 1.4, 0.2,
 												6.2, 3.4, 5.4, 2.3,
-												5.9, 3.0, 5.1, 1.8 };
+												5.9, 3.0, 5.1, 1.8,
+												7.0, 3.2, 4.7, 1.4,
+												6.5, 2.8, 4.6, 1.5,
+												5.0, 3.6, 1.4, 0.2,
+												6.9, 3.1, 4.9, 1.5 };
 
 	const signed int X_size = sizeof(h_X);
 
@@ -68,11 +72,14 @@ int main(void){
 	cudaMemcpy(d_W1, h_W1, W1_size, cudaMemcpyHostToDevice);
 
 	//Y
-	float h_y[4] = {	0,
+	float h_y[8] = {	0,
 						0,
 						1,
-						1
-						};
+						1,
+						0,
+						1,
+						0,
+						1};
 	const signed int y_size = sizeof(h_y);
 	float *d_y;
 	cudaMalloc(&d_y, y_size);
